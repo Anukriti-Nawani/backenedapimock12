@@ -49,4 +49,26 @@ app.post("/login", async (req, res) => {
 	}
 });
 
+app.post("/calculate",async(req,res)=>{
+    let {amt,interest,years}=req.body
+    
+     try{
+       let i=((+[interest])/100)
+    
+       let calculating=(((((1+i)*(+[years]))-1)/i)(+[amt]))
+       let investment_amt= (+[amt]) * (+[years])
+       let gain=calculating-investment_amt
+
+       res.send({maturityValueValue:(calculating+""),
+       amtInvested:(investment_amt+""),
+       interest_gained:(gain+"")
+    })
+              
+     }
+     catch(err)
+     {
+        res.send(err.message)
+     }    
+         })
+
 module.exports = app;
